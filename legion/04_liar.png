@@ -1,0 +1,10 @@
+There is no image here and there never was.
+
+A file name is a label a human typed. It is a suggestion. The actual
+type is decided by what the first few bytes say, and nothing on this
+machine is obliged to agree with the extension.
+
+A real PNG starts with the bytes 89 50 4E 47. This one starts with a
+hash and a space, because it is a text file wearing a costume.
+
+Last one: 05_ghost
