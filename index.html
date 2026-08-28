@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Null Quest vol.4 // Gillbert &amp; the Dragon's Eye</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0C10; --panel:#0E1117; --panel2:#12161D; --line:#262C38;
+    --green:#6EE7A8; --text:#C9D2E0; --dim:#6B7688;
+    --mono:"JetBrains Mono","Consolas","DejaVu Sans Mono",monospace;
+    --sans:"Inter","Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{overflow-x:hidden}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:var(--sans); line-height:1.6;
+    -webkit-font-smoothing:antialiased; overflow-x:clip;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:56px 22px 80px}
+  .tag{
+    font-family:var(--mono); font-size:12px; letter-spacing:.22em;
+    text-transform:uppercase; color:var(--green); opacity:.85; margin:0 0 14px;
+  }
+  h1{
+    font-size:clamp(30px,7vw,46px); line-height:1.12; margin:0 0 14px;
+    font-weight:800; letter-spacing:-.02em; color:#EAEEF5;
+  }
+  .lede{color:var(--dim); font-size:17px; margin:0 0 12px; max-width:52ch}
+  .rule{height:1px; background:var(--line); margin:34px 0 30px}
+  .grid{display:grid; gap:14px}
+  @media(min-width:640px){ .grid{grid-template-columns:1fr 1fr} }
+  a.card{
+    display:block; text-decoration:none; color:inherit;
+    background:var(--panel); border:1px solid var(--line); border-radius:14px;
+    padding:20px 20px 18px; transition:border-color .18s, background .18s, transform .18s;
+  }
+  a.card:hover{ border-color:#3A4454; background:var(--panel2); transform:translateY(-2px) }
+  .k{
+    font-family:var(--mono); font-size:11px; letter-spacing:.18em;
+    text-transform:uppercase; color:var(--green); margin:0 0 8px;
+  }
+  .card h2{font-size:19px; margin:0 0 7px; font-weight:700; color:#EAEEF5}
+  .card p{margin:0; font-size:14.5px; color:var(--dim); line-height:1.55}
+  .ext h2::after{content:" \2197"; color:var(--dim); font-size:13px}
+  footer{
+    margin-top:38px; padding-top:22px; border-top:1px solid var(--line);
+    font-size:14px; color:var(--dim);
+  }
+  footer code{font-family:var(--mono); color:var(--green); font-size:13px}
+  footer a{color:var(--dim)}
+  footer a:hover{color:var(--green)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="tag">Null Quest &bull; Volume Four</p>
+  <h1>Gillbert &amp; the Dragon's Eye</h1>
+  <p class="lede">Taking programs apart, reading what they are actually doing,
+  and finding the things that were hidden on purpose.</p>
+  <p class="lede">Twelve locked programs. Nobody is going to tell you the answers.
+  That is the entire point.</p>
+
+  <div class="rule"></div>
+
+  <div class="grid">
+
+    <a class="card" href="COLD-BOOT.html">
+      <p class="k">01 &bull; once</p>
+      <h2>Cold Boot</h2>
+      <p>Nothing else works until the machine does. Set up the Linux side,
+      install the tools, prove they run. You do this once and never again.</p>
+    </a>
+
+    <a class="card" href="book/Gillbert-and-the-Dragons-Eye.html">
+      <p class="k">02 &bull; the book</p>
+      <h2>The Course</h2>
+      <p>Static analysis, dynamic analysis, Ghidra, gdb, patching. Read it in
+      order. Skipping ahead to the mission you are stuck on has never once worked.</p>
+    </a>
+
+    <a class="card ext" href="https://github.com/pro-to-col/dragons-eye/blob/main/MISSIONS.md">
+      <p class="k">03 &bull; the board</p>
+      <h2>Missions</h2>
+      <p>Twelve locked programs, three practice labs, one final gate.
+      Check them off as they open.</p>
+    </a>
+
+    <a class="card ext" href="https://github.com/pro-to-col/dragons-eye/blob/main/FIELD-MANUAL.md">
+      <p class="k">04 &bull; the rules</p>
+      <h2>Field Manual</h2>
+      <p>How the two of you work in here. One branch per mission, one pull
+      request, and a writeup that explains how you got in.</p>
+    </a>
+
+  </div>
+
+  <footer>
+    <p>The Eye checks your answer against a fingerprint. It never holds the
+    answer itself, which is why it cannot be argued with, and why the only way
+    through a door is actually opening it.</p>
+    <p>Run it with <code>python3 checker/theeye.py</code>. Source lives at
+    <a href="https://github.com/pro-to-col/dragons-eye">github.com/pro-to-col/dragons-eye</a>.</p>
+  </footer>
+
+</div>
+</body>
+</html>

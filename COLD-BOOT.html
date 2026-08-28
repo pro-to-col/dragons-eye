@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cold Boot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+  :root{
+    --bg:#0b0d14; --panel:#12141c; --panel2:#16131f;
+    --ink:#dce1ec; --dim:#8b93a7; --faint:#5c6478;
+    --violet:#8b5cf6; --violet-hi:#b79cf5; --violet-line:#37294f;
+    --rose:#e0245e; --rose-hi:#ff6b8a;
+    --green:#6ee7a8; --amber:#fcd34d;
+    --rule:#20242f;
+    --sans:"Inter","Helvetica Neue",Arial,sans-serif;
+    --mono:"JetBrains Mono","DejaVu Sans Mono","Courier New",monospace;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:var(--sans); font-size:17px; line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+    padding:0 0 90px 0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 20px;}
+
+  /* hero */
+  .hero{
+    margin:0 -20px 30px; padding:64px 22px 40px;
+    background:
+      radial-gradient(90% 70% at 78% 6%, rgba(139,92,246,.28) 0%, rgba(139,92,246,0) 58%),
+      radial-gradient(80% 60% at 8% 96%, rgba(224,36,94,.20) 0%, rgba(224,36,94,0) 60%),
+      linear-gradient(168deg,#14121f 0%,#0b0d14 66%,#160a12 100%);
+    border-bottom:1px solid var(--violet-line);
+  }
+  .kick{font-family:var(--mono); font-size:11.5px; letter-spacing:.32em; text-transform:uppercase; color:var(--violet-hi); margin-bottom:20px;}
+  h1{font-family:var(--sans); font-weight:900; letter-spacing:-.03em; font-size:clamp(46px,15vw,80px); line-height:.9; margin:0 0 18px;}
+  .hero .sub{font-size:18px; color:#c3cad9; max-width:34ch; margin:0;}
+  .hero .sub b{color:#fff; font-weight:700;}
+
+  h2{font-family:var(--sans); font-weight:800; letter-spacing:-.02em; font-size:24px; line-height:1.16; margin:44px 0 6px;}
+  h2 .n{font-family:var(--mono); font-size:14px; color:var(--violet-hi); font-weight:700; letter-spacing:.1em; display:block; margin-bottom:7px;}
+  h3{font-family:var(--sans); font-weight:700; font-size:17px; margin:26px 0 4px; color:#eef1f7;}
+  p{margin:0 0 15px;}
+  strong{color:#fff; font-weight:700;}
+  em{color:var(--violet-hi); font-style:normal;}
+  a{color:var(--violet-hi);}
+
+  .lead{font-size:18.5px; color:#cdd4e2;}
+
+  /* the narrator voice */
+  .voice{
+    border-left:2px solid var(--violet); padding:2px 0 2px 18px; margin:20px 0 22px;
+    color:#c7bfdd;
+  }
+  .voice p{margin:0 0 12px;}
+  .voice p:last-child{margin-bottom:0;}
+  .voice b{color:#efe9fb;}
+
+  /* who-does-what chips */
+  .who{display:inline-block; font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; padding:3px 9px; border-radius:5px; vertical-align:middle; transform:translateY(-2px);}
+  .who.handler{background:rgba(139,92,246,.16); color:var(--violet-hi); border:1px solid var(--violet-line);}
+  .who.agent{background:rgba(110,231,168,.13); color:var(--green); border:1px solid #1f4436;}
+
+  /* step card */
+  .step{background:var(--panel); border:1px solid var(--rule); border-radius:14px; padding:18px 18px 6px; margin:16px 0;}
+  .step ol{margin:6px 0 12px; padding-left:20px;}
+  .step ol li{margin-bottom:9px;}
+  .step ul{margin:6px 0 12px; padding-left:20px;}
+  .step ul li{margin-bottom:6px;}
+
+  /* terminal */
+  pre{
+    font-family:var(--mono); font-size:13.5px; line-height:1.62;
+    background:var(--panel2); color:#d8d3e6;
+    border:1px solid var(--violet-line); border-radius:10px;
+    padding:14px 15px; margin:12px 0 16px;
+    overflow-x:auto; -webkit-overflow-scrolling:touch;
+  }
+  pre .p{color:var(--green);}
+  pre .c{color:var(--faint);}
+  pre .o{color:#9fb0d0;}
+  pre .h{color:var(--amber); font-weight:700;}
+  code{font-family:var(--mono); font-size:.88em; background:#1d1830; border:1px solid var(--violet-line); border-radius:5px; padding:1px 5px; color:#e7defa;}
+  pre code{background:none; border:none; padding:0; color:inherit; font-size:inherit;}
+  .kbd{font-family:var(--mono); font-size:.82em; border:1px solid #3a3550; border-bottom-width:2px; border-radius:5px; padding:1px 6px; background:#1a1626; color:#e7defa; white-space:nowrap;}
+
+  /* verify strip */
+  .verify{display:flex; gap:11px; align-items:flex-start; background:rgba(110,231,168,.06); border:1px solid #1f4436; border-radius:10px; padding:12px 14px; margin:6px 0 14px; font-size:15px; color:#bfe6d3;}
+  .verify .vt{font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:.15em; color:var(--green); text-transform:uppercase; white-space:nowrap; padding-top:2px;}
+  .verify b{color:#eafff5;}
+
+  /* handler note */
+  .note{background:rgba(224,36,94,.07); border:1px solid #40202c; border-left:3px solid var(--rose); border-radius:8px; padding:13px 15px; margin:14px 0; font-size:15px; color:#e6c9d1;}
+  .note .nt{font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:.16em; color:var(--rose-hi); text-transform:uppercase; margin-bottom:5px;}
+  .note b{color:#ffe7ee;}
+
+  .rule{border:none; border-top:1px solid var(--rule); margin:40px 0;}
+
+  .foot{margin:46px -20px 0; padding:26px 22px 30px; border-top:1px solid var(--violet-line); background:linear-gradient(180deg,#0b0d14,#100a17); color:var(--faint); font-family:var(--mono); font-size:12.5px; line-height:1.7; letter-spacing:.02em;}
+  .foot b{color:var(--violet-hi); font-weight:700;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="wrap" style="padding:0;">
+    <div class="kick">Null Quest vol.4 &nbsp;&bull;&nbsp; Chromebook</div>
+    <h1>Cold<br>Boot</h1>
+    <p class="sub">The machine has to be alive before you are any use to it. <b>Here is how it wakes up.</b></p>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="voice">
+    <p>Before you touch anything, someone has to turn this thing into a computer.</p>
+    <p>Right now it is a browser with delusions. Google shipped you a real Linux machine and then hid it, the way you hide a lighter from a toddler. We are going to un-hide it. Then we are going to put nine professional tools inside it and pull down twelve programs written specifically to keep you out.</p>
+    <p>Most of this is plumbing, and plumbing is your dad's problem: the parts that want a grown-up's password. Your one job on this page comes first, and it takes ten seconds. Sign in.</p>
+    <p>Then you watch the rest <em>closely</em>, because a reverse engineer who does not understand his own machine is just a person typing hopefully at a screen. I have met that person. I built a supercomputer partly so I would never have to be him.</p>
+  </div>
+
+  <p class="lead">Five steps. The first is yours. The middle three are plumbing. The fifth is where I hand you the keys and stop talking.</p>
+
+  <hr class="rule">
+
+  <h2><span class="n">STEP 01 &nbsp;/&nbsp; <span class="who agent">You</span></span>Sign in</h2>
+  <p>This one is yours, and it comes first. The moment the Chromebook is on, sign in. Nothing else on this page works until you do.</p>
+  <div class="step">
+    <ol>
+      <li>Power on, connect to your Wi-Fi.</li>
+      <li>Sign in with your Google account.</li>
+      <li>Get to the desktop. That is the whole step. The interesting part comes next.</li>
+    </ol>
+  </div>
+
+  <h2><span class="n">STEP 02 &nbsp;/&nbsp; <span class="who handler">Handler</span></span>Turn on the second computer</h2>
+  <p>This Chromebook is two machines wearing one case. You have only ever been shown one of them. We switch on the other.</p>
+  <div class="step">
+    <ol>
+      <li>Open <strong>Settings</strong> (the gear).</li>
+      <li>In the search box at the top, type <span class="kbd">Linux</span>. Click <strong>Linux development environment</strong>, then <strong>Turn on</strong>. (On some versions it lives under <em>Advanced &rarr; Developers</em>, or <em>About ChromeOS &rarr; Developers</em>. Same door, different hallway.)</li>
+      <li>Username: type <code>gillbert</code>. Lowercase, no spaces.</li>
+      <li>Disk size: it will suggest 10 GB. Do not accept that. Ask for <strong>20 GB</strong>. The tools are large and one of them makes enormous temporary files while it thinks. Room is cheap. Regret is not.</li>
+      <li>Let it install. It takes a few minutes. Use them to not narrate the progress bar.</li>
+    </ol>
+    <p>When it finishes, a black window opens on its own. That is a <strong>terminal</strong>. That is the actual lab. Everything from here happens in there.</p>
+  </div>
+  <div class="note">
+    <div class="nt">If that option is missing or greyed out</div>
+    <p>Then an administrator switched it off for the whole fleet, and there is a tiny building icon where the toggle should be. This is not something to defeat. It is a policy, not a puzzle. Use a personal Chromebook, or read Chapter 0.8 in the book for the three real alternatives. One of them is genuinely good.</p>
+  </div>
+
+  <h2><span class="n">STEP 03 &nbsp;/&nbsp; <span class="who handler">Handler</span></span>Install the kit</h2>
+  <p>Empty terminal, meet the tools of the trade. Type these two lines into that black window. The first asks the machine to refresh its list of available software. The second installs everything the missions need.</p>
+  <pre><span class="p">$</span> sudo apt update
+<span class="p">$</span> sudo apt install -y build-essential gdb binutils file xxd ltrace strace python3 unzip wget curl less</pre>
+  <p>It will ask for the password you just set. Type it (the screen shows nothing while you do, that is normal, it is not broken), press <span class="kbd">Enter</span>, and let it run.</p>
+  <div class="verify">
+    <div class="vt">Verify</div>
+    <div>Do not take its word for it. Ask each tool to prove it exists. If the machine prints a path for every one, you are done. If any line is blank, that tool did not install, and you run the line above again.
+    <pre style="margin-top:10px;"><span class="p">$</span> for t in gcc gdb objdump strings xxd ltrace strace python3; do which $t; done
+<span class="o">/usr/bin/gcc</span>
+<span class="o">/usr/bin/gdb</span>
+<span class="o">/usr/bin/objdump</span>
+<span class="o">...</span></pre></div>
+  </div>
+  <p class="small" style="color:var(--dim); font-size:15px;">The big one, Ghidra, is a separate and heavier install. The repo carries a script for it: once the lab is on the machine (next step), <code>bash setup-ghidra.sh</code> installs Ghidra and the Java it needs. It has a chapter in the book too (Part Zero). Leave it for now. The first several missions do not need it, and you learn more without it anyway.</p>
+
+  <h2><span class="n">STEP 04 &nbsp;/&nbsp; <span class="who handler">Handler</span></span>Pull down the lab</h2>
+  <p>The missions, the book, and the checker all live in one repository. One command copies the whole thing onto this machine and, from then on, keeps it current.</p>
+  <div class="note">
+    <div class="nt">Handler, swap the address</div>
+    <p>Replace the placeholder below with the real address of the repo you created. It is the green <b>Code</b> button on your GitHub page, the <code>https://</code> line. If <code>git</code> is not installed yet: <code>sudo apt install -y git</code>.</p>
+  </div>
+  <pre><span class="p">$</span> git clone https://github.com/<span class="h">YOUR-NAME</span>/dragons-eye.git ~/dragons-eye
+<span class="p">$</span> cd ~/dragons-eye
+<span class="p">$</span> ls
+<span class="o">FIELD-MANUAL.md  MISSIONS.md  README.md  COLD-BOOT.html  book</span>
+<span class="o">checker  missions  scripts  setup-ghidra.sh  setup.sh  writeups</span></pre>
+  <div class="verify">
+    <div class="vt">Verify</div>
+    <div>If <code>ls</code> shows those folders, the lab is on the machine. That is the last thing the handler has to do. <b>Stand up.</b></div>
+  </div>
+  <p class="small" style="color:var(--dim); font-size:15px;">Now that the repo is here: everything you typed by hand in Step 3 is also packaged as <code>bash setup.sh</code>, which installs the base kit and checks each tool for you. You did it by hand first so you would know what the button does. Next machine, or if anything ever looks missing, that one line rebuilds it.</p>
+
+  <hr class="rule">
+
+  <h2><span class="n">STEP 05 &nbsp;/&nbsp; <span class="who agent">Agent</span></span>Take the keys</h2>
+  <div class="voice">
+    <p>He is out of the chair. Now it is you.</p>
+    <p>First thing you do on your own machine is find out what it actually is. Ask it what kind of processor it has, because that decides which set of programs are yours:</p>
+  </div>
+  <pre><span class="p">$</span> uname -m
+<span class="o">x86_64</span>   <span class="c"># Intel/AMD -> you use missions/x86_64/</span>
+<span class="c"># or</span>
+<span class="o">aarch64</span>  <span class="c"># ARM -> you use missions/arm64/</span></pre>
+  <p>Now knock on the first door. It is locked. You do not have the key yet. That is the correct and intended state of the universe at this exact moment:</p>
+  <pre><span class="p">$</span> ./missions/x86_64/m01_helloghost
+<span class="o">  Enter the password to lay the ghost to rest.</span>
+<span class="p">  password&gt;</span> <span class="c"># you have nothing. good. keep reading.</span></pre>
+  <div class="voice">
+    <p>That prompt is the entire course in one line. Twelve times something asks you for a secret it is carrying <em>inside itself</em>, and twelve times you are going to reach in and take it instead of guessing.</p>
+    <p>The book teaches you the first reach in Chapter 1. Open it now:</p>
+  </div>
+  <pre><span class="p">$</span> <span class="c"># on the Chromebook, just double-click book/Gillbert-and-the-Dragons-Eye.html</span>
+<span class="p">$</span> <span class="c"># or from the ChromeOS Files app, it opens in the browser</span></pre>
+  <div class="verify">
+    <div class="vt">The loop</div>
+    <div>Crack a door in the terminal. Prove it to the Eye: <code>python3 checker/theeye.py 1</code>. Collect the shard. Write down how you did it in <code>writeups/</code>. Next door. Twelve times. The <b>README</b> in this folder is your map for all of it.</div>
+  </div>
+
+  <hr class="rule">
+
+  <div class="voice">
+    <p>One more thing, and then I am genuinely done talking.</p>
+    <p>Verify everything. Not because I said so. Because the entire discipline you are about to learn is one idea wearing twelve costumes: <b>do not believe what a program claims. Look at what it does.</b> The screen said "ACCESS DENIED." Fine. Was it telling the truth? You are going to spend a month finding out that programs lie constantly, mostly by accident, and that the only person who knows what a machine is really doing is the one who checked.</p>
+    <p>Somewhere out there is a version of you who closed this page at the first heading. He let someone else set up his machine and never learned what a terminal was. He takes every shortcut. He is going to be faster than you for about a week.</p>
+    <p>Then you are going to pass him and never see him again. Beat him the boring way. Do the reps.</p>
+  </div>
+
+</div>
+
+<div class="foot">
+  <b>NULL QUEST vol.4</b> &bull; Cold Boot &bull; a Legion Studios production<br>
+  Steps 1 through 4: the handler. Step 5 onward: the agent.<br>
+  No Ghidra required to start. A terminal and twenty minutes gets you a door.
+</div>
+
+</body>
+</html>

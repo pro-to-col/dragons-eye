@@ -1,0 +1,21 @@
+name: The Eye
+# The robot that checks your homework. See FIELD-MANUAL.md.
+# It confirms your mission PR includes a writeup and that any script compiles.
+# It never sees answers. Green check = you shipped.
+
+on:
+  pull_request:
+  push:
+    branches:
+      - "mission-*"
+
+jobs:
+  homework:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: The Eye checks your writeup
+        run: python3 scripts/portfolio_check.py

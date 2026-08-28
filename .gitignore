@@ -1,0 +1,18 @@
+# The Eye's local progress file. Yours, and only yours.
+.eye_progress
+checker/.eye_progress
+
+# Python leftovers
+__pycache__/
+*.pyc
+
+# Your patched copies and scratch builds. Keep the originals in missions/ clean.
+*.patched
+*.bak
+*.orig
+
+# Editor and OS junk
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
