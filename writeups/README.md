@@ -5,7 +5,7 @@ real reverse engineer keeps notes. This is you becoming one.
 
 ## The shape
 
-When you crack a door, make a folder named for the mission and drop your evidence
+When you open a door, make a folder named for the mission and drop your evidence
 in it:
 
 ```

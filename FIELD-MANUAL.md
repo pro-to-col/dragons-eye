@@ -1,6 +1,6 @@
 # Field Manual
 
-How the two of you work in here. Read it once you have cracked a door or two and
+How the two of you work in here. Read it once you have opened a door or two and
 the terminal has stopped feeling like a threat.
 
 ---
@@ -33,7 +33,7 @@ main line and gives your handler one clean thing to review.
 git switch -c mission-04
 ```
 
-**2. Do the work.** Crack the door in your terminal. Then, in
+**2. Do the work.** Open the door in your terminal. Then, in
 `writeups/mission-04/`, leave your evidence:
 
 - `notes.md`: how you got in, in your own words. Not a novel. The real steps.
