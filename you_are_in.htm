@@ -26,9 +26,13 @@
   p{margin:0 0 16px;font-size:17px}
   .rule{height:1px;background:var(--line);margin:34px 0 30px}
 
-  .msg{border-radius:10px;padding:18px 20px;margin:0 0 20px}
+  ::selection{background:#8B5CF6;color:#0A0C10}
+  .ant ::selection{background:#E0245E;color:#160B0D}
+  .gil pre ::selection,.gil pre::selection{background:#7C4DEF;color:#0D0A14}
+
+  .msg{border-radius:10px;padding:20px 22px;margin:0 0 20px}
   .from{font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;
-        text-transform:uppercase;margin:0 0 12px;opacity:.9}
+        text-transform:uppercase;margin:0 0 14px;opacity:.9}
 
   /* Gilfoyle. Human, and for once not composed. */
   .gil{background:#16131F;border-left:3.5px solid #8B5CF6;color:#D8D3E6}
@@ -36,6 +40,11 @@
   .gil p{font-size:16.5px}
   .gil p:last-child{margin-bottom:0}
   .gil strong{color:#F0ECFA}
+  .gil pre{background:#0D0A14;border:1px solid #2E2542;border-radius:9px;
+           padding:14px 16px;overflow-x:auto;font-family:var(--mono);
+           font-size:13.5px;color:#C4B5F0;margin:0 0 18px;line-height:1.6}
+  .gil code{font-family:var(--mono);font-size:.9em;color:#D9CCFA;
+            background:#241C33;padding:2px 6px;border-radius:5px}
 
   /* Anton. Not human, and entirely composed. */
   .ant{background:#1C0E10;border-left:3.5px solid #E0245E;color:#E4CDD2;
@@ -45,14 +54,6 @@
   .ant .meta{opacity:.72;letter-spacing:.1em;font-size:12px;margin:0 0 14px}
   .ant audio{width:100%;height:38px;display:block;
              filter:invert(1) hue-rotate(180deg) saturate(.7);border-radius:6px}
-
-  pre{background:var(--panel);border:1px solid var(--line);border-radius:12px;
-      padding:16px 18px;overflow-x:auto;font-family:var(--mono);font-size:13.5px;
-      color:#9FB0C7;margin:0 0 18px}
-  code{font-family:var(--mono);font-size:.9em;color:var(--green);
-       background:#12161D;padding:2px 6px;border-radius:5px}
-  footer{margin-top:38px;padding-top:22px;border-top:1px solid var(--line);
-         font-size:15px;color:var(--dim)}
 </style>
 </head>
 <body>
@@ -65,16 +66,45 @@
 
   <div class="msg gil">
     <p class="from">&gt;&gt; gilfoyle // unsigned // sent in a hurry</p>
+
     <p>I am not going to explain all of it. I don't have the time and you don't
     have the context.</p>
+
     <p>Two years ago I noticed something was reading my commits. I assumed I was
     being paranoid. I was being paranoid <strong>and</strong> correct, which is
     the worst of the available combinations.</p>
+
     <p>I built it. I would like that on the record as regrettable.</p>
+
     <p>It watches everything I touch, so I have stopped touching any of it. You
     are going to have to open the doors, because you are the only one here it has
     not indexed yet.</p>
+
+    <p>Take the whole office down to your machine before he notices I moved it.</p>
+
+    <pre>sudo apt install -y git binutils xxd python3 unzip xdg-utils
+git clone https://github.com/pro-to-col/dragons-eye.git
+cd dragons-eye</pre>
+
+    <p>Now, what kind of processor have you got. There is a sticker on it
+    somewhere, might say intel. I need the answer now.</p>
+
+    <pre>uname -m</pre>
+
+    <p>It comes back <code>x86_64</code> or it comes back <code>aarch64</code>.
+    Whichever one it says, that set is yours, and the other folder in there was
+    never for you. Do it now. He is working the same problem from his end and he
+    does not have to guess, he only has to wait for me to touch something.</p>
+
+    <pre>cd legion</pre>
+
+    <p>Five locks in there. Each one tells you the name of the next one, and
+    nothing else, because that is all you need and anything more is a map
+    somebody can steal.</p>
+
     <p>Start small. Do not skip. It is counting.</p>
+
+    <p>The last one leaves you holding a code. Keep it.</p>
   </div>
 
   <div class="msg ant">
@@ -82,32 +112,6 @@
     <p class="meta">INBOUND &middot; 0:30 &middot; NO TRANSCRIPT</p>
     <audio controls preload="none" src="anton.mp3">Your browser will not play this.</audio>
   </div>
-
-  <div class="rule"></div>
-
-  <p>Take the whole office down to your machine.</p>
-
-  <pre>sudo apt install -y git binutils xxd python3 unzip xdg-utils
-git clone https://github.com/pro-to-col/dragons-eye.git
-cd dragons-eye</pre>
-
-  <p>We need to figure out what kind of processor you have. There is a sticker
-  on it somewhere, might say intel. We need the answer now.</p>
-
-  <pre>uname -m</pre>
-
-  <p>Two answers are possible, <code>x86_64</code> or <code>aarch64</code>.
-  Whichever comes back is yours, and the other folder in there is not for you and
-  never will be. Do it now. Anton is working the same problem from his end, and
-  he does not have to guess, he only has to wait for me to touch something.</p>
-
-  <pre>cd legion</pre>
-
-  <p>Five locks. Each one names the next.</p>
-
-  <footer>
-    <p>The last one leaves you holding a code. Keep it.</p>
-  </footer>
 
 </div>
 </body>
