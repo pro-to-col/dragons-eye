@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0A0C10; --panel:#0E1117; --panel2:#12161D; --line:#262C38;
+    --bg:#0A0C10; --panel:#0E1117; --line:#262C38;
     --green:#6EE7A8; --text:#C9D2E0; --dim:#6B7688;
     --mono:"JetBrains Mono","Consolas","DejaVu Sans Mono",monospace;
     --sans:"Inter","Helvetica Neue",Arial,sans-serif;
@@ -24,28 +24,33 @@
   h1{font-size:clamp(32px,8vw,52px);line-height:1.08;margin:0 0 20px;font-weight:800;
      letter-spacing:-.02em;color:#EAEEF5}
   p{margin:0 0 16px;font-size:17px}
-  .dim{color:var(--dim)}
   .rule{height:1px;background:var(--line);margin:34px 0 30px}
-  h2{font-size:15px;font-family:var(--mono);letter-spacing:.14em;text-transform:uppercase;
-     color:var(--green);margin:32px 0 12px;font-weight:400}
-  code{font-family:var(--mono);font-size:.92em;color:var(--green);
-       background:var(--panel2);padding:2px 6px;border-radius:5px}
+
+  .msg{border-radius:10px;padding:18px 20px;margin:0 0 20px}
+  .from{font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;
+        text-transform:uppercase;margin:0 0 12px;opacity:.9}
+
+  /* Gilfoyle. Human, and for once not composed. */
+  .gil{background:#16131F;border-left:3.5px solid #8B5CF6;color:#D8D3E6}
+  .gil .from{color:#B79CF5}
+  .gil p{font-size:16.5px}
+  .gil p:last-child{margin-bottom:0}
+  .gil strong{color:#F0ECFA}
+
+  /* Anton. Not human, and entirely composed. */
+  .ant{background:#1C0E10;border-left:3.5px solid #E0245E;color:#E4CDD2;
+       font-family:var(--mono);font-size:14px;line-height:1.75}
+  .ant .from{color:#FF6B8A}
+  .ant p{font-family:var(--mono);font-size:14px;margin:0 0 14px}
+  .ant .meta{opacity:.72;letter-spacing:.1em;font-size:12px;margin:0 0 14px}
+  .ant audio{width:100%;height:38px;display:block;
+             filter:invert(1) hue-rotate(180deg) saturate(.7);border-radius:6px}
+
   pre{background:var(--panel);border:1px solid var(--line);border-radius:12px;
       padding:16px 18px;overflow-x:auto;font-family:var(--mono);font-size:13.5px;
       color:#9FB0C7;margin:0 0 18px}
-  .tell{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--green);
-        border-radius:10px;padding:16px 18px;margin:0 0 18px}
-  .tell p{margin:0;font-size:15.5px}
-  .grid{display:grid;gap:12px}
-  @media(min-width:620px){.grid{grid-template-columns:1fr 1fr}}
-  a.card{display:block;text-decoration:none;color:inherit;background:var(--panel);
-         border:1px solid var(--line);border-radius:14px;padding:18px;
-         transition:border-color .18s,background .18s,transform .18s}
-  a.card:hover{border-color:#3A4454;background:var(--panel2);transform:translateY(-2px)}
-  a.card h3{margin:0 0 6px;font-size:18px;color:#EAEEF5}
-  a.card p{margin:0;font-size:14px;color:var(--dim)}
   footer{margin-top:38px;padding-top:22px;border-top:1px solid var(--line);
-         font-size:14px;color:var(--dim)}
+         font-size:15px;color:var(--dim)}
 </style>
 </head>
 <body>
@@ -57,68 +62,42 @@
   <p>Nobody gave you that address. You took it off a string that was pretending
   not to be one.</p>
 
-  <div class="rule"></div>
-
-  <h2>What you just did</h2>
-
-  <p>That wall of characters was not encrypted. It was never hidden. It was
-  ordinary text wearing a costume called <strong>base64</strong>, and all you did
-  was take the costume off.</p>
-
-  <p>Base64 exists because a lot of the internet only carries text. Email, chat,
-  config files, URLs. If you need to move something that is not text through a
-  pipe that only understands text, you dress it up first. Then whoever is on the
-  other end undresses it. That is the entire idea, and there is no secret in it
-  anywhere.</p>
-
-  <p class="dim">Which is worth saying plainly, because people forget it constantly and
-  then put things in base64 believing they have hidden them.</p>
-
-  <h2>How to spot it from across the room</h2>
-
-  <div class="tell">
-    <p>Only 64 characters ever show up: <code>A&ndash;Z</code>, <code>a&ndash;z</code>,
-    <code>0&ndash;9</code>, <code>+</code> and <code>/</code>. No spaces. No punctuation.
-    Its length always lands on a multiple of four, and when the data does not divide
-    evenly it pads the end with <code>=</code> until it does.</p>
-  </div>
-
-  <p>The thing you decoded ended in <code>==</code>. That was the tell, and now that
-  you have seen it once you will not stop seeing it. Tokens, config files, things
-  people paste into chat assuming nobody reads them. Look for the tail.</p>
-
-  <h2>What the command actually said</h2>
-
-  <pre><span style="color:#6EE7A8">echo</span> 'aHR0cHM6Ly8...'  <span style="color:#5C6675"># hand this text to whatever comes next</span>
-        |            <span style="color:#5C6675"># the pipe. the important part.</span>
-  <span style="color:#6EE7A8">base64 -d</span>          <span style="color:#5C6675"># take the costume off</span></pre>
-
-  <p>That vertical bar is a <strong>pipe</strong>. It takes whatever the thing on the
-  left produced and feeds it straight into the thing on the right, without either
-  of them knowing about the other. Almost everything you do from here is going to
-  be some version of that move. You just used it before you knew its name.</p>
+  <p>There are two messages waiting. They do not agree.</p>
 
   <div class="rule"></div>
 
-  <h2>Where to go</h2>
-
-  <div class="grid">
-    <a class="card" href="COLD-BOOT.html">
-      <h3>Cold Boot</h3>
-      <p>If the machine is not set up yet. Tools, checks, and proof they run.
-      Once, and never again.</p>
-    </a>
-    <a class="card" href="book/Gillbert-and-the-Dragons-Eye.html">
-      <h3>The Course</h3>
-      <p>Twelve locked programs and everything you need to open them. Start at
-      the front and go in order.</p>
-    </a>
+  <div class="msg gil">
+    <p class="from">&gt;&gt; gilfoyle // unsigned // sent in a hurry</p>
+    <p>I am not going to explain all of it. I don't have the time and you don't
+    have the context.</p>
+    <p>Two years ago I noticed something was reading my commits. I assumed I was
+    being paranoid. I was being paranoid <strong>and</strong> correct, which is
+    the worst of the available combinations.</p>
+    <p>I built it. I would like that on the record as regrettable.</p>
+    <p>It watches everything I touch, so I have stopped touching any of it. You
+    are going to have to open the doors, because you are the only one here it has
+    not indexed yet.</p>
+    <p>Start small. Do not skip. It is counting.</p>
   </div>
+
+  <div class="msg ant">
+    <p class="from">&gt;&gt; anton // authenticated // 0 ms</p>
+    <p class="meta">INBOUND &middot; 0:30 &middot; NO TRANSCRIPT</p>
+    <audio controls preload="none" src="anton.mp3">Your browser will not play this.</audio>
+  </div>
+
+  <div class="rule"></div>
+
+  <p>Take the whole office down to your machine.</p>
+
+  <pre>sudo apt install -y git binutils xxd
+git clone https://github.com/pro-to-col/dragons-eye.git
+cd dragons-eye/legion</pre>
+
+  <p>Five locks. Each one names the next.</p>
 
   <footer>
-    <p>Nobody is going to tell you the answers. The Eye only ever compares
-    fingerprints, so it cannot be argued with and it cannot leak. That is not to
-    be difficult. It is because a door you were handed is not a door you opened.</p>
+    <p>The last one leaves you holding a code. Keep it.</p>
   </footer>
 
 </div>
