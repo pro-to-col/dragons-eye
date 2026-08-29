@@ -1,4 +1,5 @@
-There is no image here and there never was.
+# LEGION 04
+# there is no image here and there never was.
 
 A file name is a label a human typed. It is a suggestion. The actual
 type is decided by what the first few bytes say, and nothing on this
@@ -7,4 +8,8 @@ machine is obliged to agree with the extension.
 A real PNG starts with the bytes 89 50 4E 47. This one starts with a
 hash and a space, because it is a text file wearing a costume.
 
-Last one: 05_ghost
+Last one: 05_ghost. It is a program, and it has nothing to say out
+loud, so do not bother running it. Programs are full of text that is
+never printed, and the command that pulls all of it out at once is
+called strings. More than one thing in there looks like a code.
+Only one of them is not making excuses.
